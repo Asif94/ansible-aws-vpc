@@ -1,8 +1,9 @@
 - hosts: localhost
   tasks:
    - name: Import VPC Variables
-     include_vars: /home/ubuntu/ansible-aws-vpc/vars/vpc_setup
-   
+     include_vars: 
+        file: /home/ubuntu/ansible-aws-vpc/vars/vpc_setup
+        remote_src: yes
    - name: Create aprofile VPC
      ec2_vpc_net:
        name: "{{vpc_name}}"
