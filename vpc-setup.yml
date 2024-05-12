@@ -98,7 +98,12 @@
          Name: aprofile-IGW
      register: igw_out
      
-   - name: set up Public Subnet route table
+   - name: Debug variable value
+     debug:
+       msg: "The value of vcp is {{ vcp }}"
+     
+     
+   - name: Set up Public Subnet route table
      ec2_vpc_route_table:
        vpc_id: "{{vpcout.vcp.id}}"
        region: "{{ region }}"
