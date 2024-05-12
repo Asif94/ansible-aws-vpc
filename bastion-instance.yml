@@ -1,0 +1,12 @@
+---
+- name: setup Aprofile bastion Host
+  hosts: Localhost
+  connection: Localhost
+  gather_facts: no
+  tasks:
+    - name: Import VPC setup variable
+      include_vars: vars/bastion_setup
+      
+    - name: Import VPC setup variable
+      include_vars: vars/output_cars
+  
