@@ -135,7 +135,7 @@
        routes:
          - dest: 0.0.0.0/0
            gateway_id: "{{ NATGW_out.nat_gateway_id }}"
-     register: pubRT_out
+     register: privRT_out
           
    - debug:
        var: "{{ item }}"
@@ -150,7 +150,7 @@
        - igw_out.gateway_id
        - pubRT_out.route_table.id       
        - NATGW_out.nat_gateway_id
-       - PrivRT_out.route_table.id
+       - privRT_out.route_table.id
           
         
      
