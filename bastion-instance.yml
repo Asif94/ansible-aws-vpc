@@ -35,11 +35,11 @@
       register: BastionSG_out
         
     - name: Creating Bastion Host
-      ec2_instance:
+      ec2:
         key_name: Aprofile-key
         region: "{{ region }}"
         instance_type: t2.micro
-        image_id: "{{ bastion_ami }}"
+        image: "{{ bastion_ami }}"
         wait: yes
         wait_timeout: 300
         instance_tags:
@@ -51,7 +51,7 @@
           Name: "Bastion_Host"
           Project: Aprofile
           Owner: Devops team
-        security_group: "{{BastionSG_out.group_id}}"
+        group_id: "{{BastionSG_out.group_id}}"
         vpc_subnet_id: "{{ pubsub1id }}"
       register: bastionHost_out
       
