@@ -3,13 +3,11 @@
   hosts: localhost
   connection: localhost
   gather_facts: no
+  vars_files:
+    - vars/bastion_setup.txt
+    - vars/output_cars.txt
+  
   tasks:
-    - name: Import VPC setup variable
-      include_vars: vars/bastion_setup.txt
-      
-    - name: Import VPC setup variable
-      include_vars: vars/output_cars.txt
-      
     - name: Create Aprofile ec2 key
       ec2_key:
         name: Aprofile-key
@@ -33,7 +31,7 @@
           - proto: tcp
             from port: 22
             to_port: 22
-            cidr_ip: "{{MYIP}}"
+            cidr_ip: "{{ MYIP }}"
       register: BastionSG_out
         
     - name: Creating Bastion Host
