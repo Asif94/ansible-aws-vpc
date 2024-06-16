@@ -102,10 +102,6 @@
           Project: aprofile
           Owner: DevOps Team
         exact_count: 1
-        count_tag:
-          Name: "mc01"
-          Project: aprofile
-          Owner: DevOps Team
         security_group: "{{aproStackSG_out.group_id}}"
         vpc_subnet_id: "{{privsub1id}}"
       register: mc01_out
