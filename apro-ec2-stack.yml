@@ -73,7 +73,7 @@
       register: web01_out
 
     - debug:
-        var: web01_out.tagged_instances[0].id
+        var: web01_out
 
     - name: Creating tomcat app01
       amazon.aws.ec2_instance:
