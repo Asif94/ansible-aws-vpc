@@ -146,13 +146,13 @@
     - debug:
         var: db01_out.tagged_instances[0].id
 
-    - local_action:
-        module: ec2_elb_lb
+    - name: Configure ELB
+      ec2_elb_lb:
         name: "aprofile-elb"
-        region: "{{region}}"
+        region: "{{ region }}"
         state: present
         instance_ids:
-          - "{{ web01_out.tagged_instances[0].id }}"
+          - "{{ item.id }}"
         purge_instance_ids: true
         security_group_ids: "{{ aproELBSG_out.group_id }}"
         subnets:
@@ -160,9 +160,11 @@
           - "{{ pubsub2id }}"
           - "{{ pubsub3id }}"
         listeners:
-          - protocol: http # options are http, https, ssl, tcp
+          - protocol: http
             load_balancer_port: 80
             instance_port: 80
+      with_items: "{{ web01_out.instances }}"  # Use 'instances' instead of 'tagged_instances'
+      when: web01_out.changed  # Execute only if web01 instance is changed
 
     - name: Insert/Update Hosts IP & Name in file provision-stack/group_vars/hostsip
       blockinfile:
