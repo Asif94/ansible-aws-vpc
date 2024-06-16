@@ -1,9 +1,24 @@
 ---
 - name: Setup Aprofile Stack
   hosts: localhost
-  connections: local
+  connection: local
   gather_facts: no
   tasks:
     - name: Import VPC setup Variable
       include_vars: vars/vpc-output_vars
-      
+
+    - name: Import vprofile setup Variable
+      include_vars: vars/vprostacksetup
+
+    - name: Create aprofile ec2 key
+      ec2_key:
+        name: aprokey
+        region: "{{region}}"
+      register: aprokey_out
+
+    - name: Save private key into file loginkey_apro.pem
+      copy:
+        content: "{{aprokey_out.key.private_key}}"
+        dest: "./loginkey_vpro.pem"
+        mode: 0600
+      when: aprokey_out.changed
