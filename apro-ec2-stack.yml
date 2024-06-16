@@ -144,7 +144,7 @@
         var: db01_out.tagged_instances[0].id
 
     - local_action:
-        module: ec2_elb_lb
+        action: ec2_elb_lb
         name: "aprofile-elb"
         region: "{{region}}"
         state: present
