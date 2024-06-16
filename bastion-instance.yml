@@ -5,7 +5,7 @@
   gather_facts: no
   vars_files:
     - vars/vpc_setup
-    - vars/output_cars.txt
+    - vars/output_vars
   
   tasks:
     - name: Create Aprofile ec2 key
